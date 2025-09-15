@@ -1,5 +1,5 @@
 ## __HTTP__
-- http protocol used to fetch files. it is used `client-server artitechture`.request are initiated by browser.document is constructed from text,images,scripts etc.
+- http protocol is used to fetch files. it is used mainly in`client-server artitechture`. Request are initiated by the browser. Document is constructed from text,images,scripts etc.
 - client server exchange messages (instead of stream of data).
 - HTTP needs reliable protocol like `tcp or tls-encrypted `tcp connection. HTTP also used to post data to server,like `form result's`. can be used to fetch part of document to update web page.
 
