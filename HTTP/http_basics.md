@@ -165,3 +165,94 @@ ex - cache-control , ETag, last-modfied.
 
 ## HOP(head-of-line)
 - ⚠️ even `http/2 `improved lot by multiplexing as all data sent from underlying TCP layer.` AT TCP layer HOL can still occur If one TCP packet is lost during transmission, TCP’s reliability mechanism (guaranteeing in-order delivery) forces the entire connection to wait until the lost packet is retransmitted and received.`
+
+
+## __HTTP & SSL__:-
+- instead of sending HTTP over basic TCP/IP stack an additional encrypted transmission layer was created by netscape. which was SSL it's early versions were not public. but later version SSL 2.0 SSL 3.0 were available to used by ecommerce website.
+
+- as encrypted and gurantee of authenticity of the message's. SSL was late became TLS and it was standarizes.
+
+- as web no longer used in just academic network . it became a jungle of advertiser , random people or criminal' for private data. as later application needed require accesss to private data email,location etc. TLS became necessary.
+
+
+## __HTTP for complex applications__:-
+- __check out mdn__:- https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Evolution_of_HTTP#using_http_for_complex_applications
+
+- webDAV - authoring,editing,collaborating through http on server's.
+
+## __REST (representational state transfer)__
+- `restfull api` - so what does a restfull api do ? 
+    ok as we know communcation happens b/w server and client which is basic req and response and for doing that what are the best practices ,rules, standards that restfull api gives. 
+
+  - works on client-server artitechture.
+  - scenarios - SSR - server side rendering. n SSR, the client requests data (like blogs), and the server fetches from DB, renders an HTML page, and returns it. Browsers can render this, but non-browsers (mobile, Alexa) can’t use HTML effectively, making clients dependent on the server’s output.
+
+ - In REST, the server returns raw data (JSON has key/value pairs /XML) instead of HTML. Any client (browser, mobile, Alexa) can consume it and render as needed, making clients independent of the server’s presentation.
+
+ - if your are sure that your client is a browser than it's best to send for ex-html it reduces a step. like in (google.com). 
+
+## Spoiler alert: `also you have to do mdn client server database`
+ - alway's respect HTTP method's - like GET , PUT , POST, PATCH , DELETE etc.
+ - ok so let's see for what we commonly use these.
+    - GET /user = user data read kro and return kro.
+    - POST /user = handel new user creation.
+    - PATCH /user = update the user.
+
+- but if we use them the wrong way, opposite way it will not gonna affect any thing much but we can't say it as correct then also it is wrong.
+   - POST /update user ---> user update.
+   - POST /create user ----> create.
+   - POST /delete user -----> delete user.
+      NOT A BEST PRACTICE .
+
+    - CSR - we got JSON data first than it get rendered on client side. (Client side rendering).
+
+### just for API check freecodecamp not for REST as it mostly wrong
+ 
+## What is API ?
+- Application programming interface . it establish connection b/w program's so that they can transfer data.
+
+### just for API check freecodecamp not for REST as it mostly wrong.
+
+## REST ?
+- it is an artitechtural style that make's communication easier bw client and server. REST API's use existing HTTP request method's to work with resources present on the server. and CRUD operation's are also done like CRUD create read update Delete.
+
+
+firstly let's learn a lil bit about how fetch is getting used in JS. 
+- fetch is getting used to fetch a resource from the server as we are talking about REST through an endpoint which is basically a URL we'll be seeing that later.
+
+```javascript
+ fetch('https://jsonplaceholder.typicode.com/todos/5')
+ .then(res => res.json())
+ .then(data => {
+  console.log(data.title)
+ })
+ ```
+ 
+ - here in the code we are using for a to get resource using an endpoint. and then the res we get wew take it as it would be in JSON or(in old days in XML).convert it to simple data .then use the data the way you want.
+
+ - NOW there could be two cases - 1.`if broken internet --> fetch goes directly to .catch`. 
+   2. `404 response or else --> fetch is "okay" with this you just got a res with res.ok = false.`
+
+  ```javascript
+    fetch('https://jsonplaceholder.typicode.com/todos/53r')
+ .then(res => {
+  if (!res.ok){
+    console.log("problem")
+    // return;
+  }
+
+   return res.json()
+ })
+ .then(data => {
+  console.log(data.title)
+ })
+ .catch(error => {
+  console.log("this is error",error);
+ })
+ ```
+
+- as here what we did we passed undefined or not present endpoint param . so it would have return with `404 error in html not in JSON`. so as we are trying parse it as json to data in `res.json()`. which is not even present because above even we tried to handel the issue but there we not return or exit from this before parsing so hence error is not what is expected it's shows network issue.
+
+```
+ NetworkError when attempting to fetch resource.
+```

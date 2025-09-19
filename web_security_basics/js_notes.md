@@ -121,4 +121,11 @@ A way to have embedded expressions in strings:-
 
 - str.trim( ) // removes whitespaces
 
-## __String Methods in JS__ :-
+## Extra Essential notes :-
+- in css we can use - 
+
+```css
+input:focus {
+    outline:none;
+}
+```
