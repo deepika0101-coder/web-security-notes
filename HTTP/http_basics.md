@@ -35,7 +35,7 @@ X-Forwarded-For: <client>, <proxy>, …, <proxyN>
 
 ### __proxies(mdn)__
 - proxies caching depends on `cache-control header: private`
-means shared proxies and CDN could not cache it and if they there is possibilites of caching login credentials or other critical info. then it is prone to attacks.
+means shared proxies and CDN(Content delivery network) could not cache it and if they there is possibilites of caching login credentials or other critical info. then it is prone to attacks.
 
   - `caching` - it stores frequently accessed data for a short period of time. if it allow's accessing unauthorized data the it is vunlerable.
 
@@ -256,3 +256,49 @@ firstly let's learn a lil bit about how fetch is getting used in JS.
 ```
  NetworkError when attempting to fetch resource.
 ```
+- in other case we are simply return in that if block so nothing else which is res.json get executed but in the next `.then` get's undefined so the title breaks. and we get correct error with problem in console.
+
+- `more better approach` 
+   - we can use `throw new Error` there . 
+
+``` js
+fetch('https://jsonplaceholder.typicode.com/todos/53r')
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("HTTP error: " + res.status); // <-- important
+    }
+    return res.json();
+  })
+  .then(data => {
+    console.log(data.title);
+  })
+  .catch(error => {
+    console.log("this is error", error);
+  });
+```
+
+## we would be learning how all these interaction and everything is happening in bw client-server and db in to-do.
+
+ ## WHAT'S AN API ?
+- You send a request to an API endpoint (like /weather?city=London).
+
+- The server processes it and sends back a response (like { "temp": 24 }).
+
+👉 APIs are just rules that define how software talks to other software.
+
+## What is an API Key?
+- API key is like password or id card for using api.
+ - `it tells the server` 
+   1. who you are identification.
+   2. what you are allowed to do (authorization).
+   3. How much you can use (rate limits).
+
+  👉 Example: If 1000 people use a weather API, the server must know which request belongs to which user — otherwise one person could abuse it.
+
+  ## where api key's are sent ?
+ -  Query string → ?apikey=12345
+ -  Headers → Authorization: Bearer 12345
+ -  Body (rare, for POST requests)
+
+
+  # __Now i will be creating section's for each topic or these notes will become very huge.__
